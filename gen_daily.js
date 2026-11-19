@@ -40,7 +40,10 @@ const words = [0,1,2].map(k => HOTWORDS[(d - 1 + k * 7) % HOTWORDS.length]);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 /* ==== 时政要闻：最新时政按日期取前4条 ==== */
 const affairsSorted = AFFAIRS.slice().sort((a,b) => b.date.localeCompare(a.date));
-const affairsTop = affairsSorted.slice(0, 4);
+// 每天从最新 8 条里按日期滑动取 4 条，保证每日组合不同、内容换代不重复
+const affairsPool = affairsSorted.slice(0, Math.min(8, affairsSorted.length));
+const affairsStep = (d - 1) % Math.max(1, affairsPool.length - 3);
+const affairsTop = [0,1,2,3].map(k => affairsPool[(affairsStep + k) % affairsPool.length]);
 const AFFAIRS_CAT = { speech:'最新讲话', meeting:'会议决议', media:'权威媒体', current:'时事热点' };
 const AFFAIRS_COLOR = { speech:'#9c1c1c', meeting:'#8e44ad', media:'#b8912f', current:'#2c5d8f' };
 const affairsHtml = affairsTop.map(a => `
