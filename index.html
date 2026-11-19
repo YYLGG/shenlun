@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<!-- 作者：宇宇爱高高，创建时间：2026-11-19，自主设计，AI辅助编码 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="宇宇爱高高">
+<meta name="copyright" content="© 2026 宇宇爱高高">
+<meta name="generator" content="WorkBuddy，需求与设计由宇宇爱高高完成">
+<title>军转申论研学 · 五位一体政策材料库</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-emblem">研</div>
+      <div class="brand-text">
+        <h1>军转申论研学</h1>
+        <p>五位一体 · 政策材料库</p>
+      </div>
+      <button class="nav-close" id="navClose" aria-label="关闭导航">✕</button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-group-label">复习概览</div>
+      <a class="nav-item active" data-view="nav">
+        <span class="nav-icon">⌂</span><span>导航中心</span>
+      </a>
+      <a class="nav-item" data-view="home">
+        <span class="nav-icon">◎</span><span>今日概览</span>
+      </a>
+      <a class="nav-item" data-view="push">
+        <span class="nav-icon">▦</span><span>每日推送存档</span>
+      </a>
+      <a class="nav-item" data-view="progress">
+        <span class="nav-icon">◐</span><span>学习进度打卡</span>
+      </a>
+
+      <div class="nav-group-label">核心资料</div>
+      <a class="nav-item" data-view="affairs">
+        <span class="nav-icon">◉</span><span>时政要闻速览</span>
+      </a>
+      <a class="nav-item" data-view="library">
+        <span class="nav-icon">▤</span><span>五位一体材料库</span>
+      </a>
+      <a class="nav-item" data-view="topics">
+        <span class="nav-icon">◈</span><span>主题·精神分类</span>
+      </a>
+      <a class="nav-item" data-view="stats">
+        <span class="nav-icon">▧</span><span>数据统计看板</span>
+      </a>
+      <a class="nav-item" data-view="timeline">
+        <span class="nav-icon">⌁</span><span>政策时间轴</span>
+      </a>
+      <a class="nav-item" data-view="hotwords">
+        <span class="nav-icon">✦</span><span>申论热点词</span>
+      </a>
+      <a class="nav-item" data-view="quotes">
+        <span class="nav-icon">❝</span><span>每日金句</span>
+      </a>
+
+      <div class="nav-group-label">军转备考</div>
+      <a class="nav-item" data-view="mil">
+        <span class="nav-icon">✦</span><span>军转特色专题</span>
+      </a>
+      <a class="nav-item" data-view="bj">
+        <span class="nav-icon">▣</span><span>北京市情专题</span>
+      </a>
+      <a class="nav-item" data-view="skills">
+        <span class="nav-icon">✎</span><span>申论技法与真题</span>
+      </a>
+      <a class="nav-item" data-view="express">
+        <span class="nav-icon">❞</span><span>规范表达句式库</span>
+      </a>
+
+      <div class="nav-group-label">理论学习</div>
+      <a class="nav-item" data-view="study">
+        <span class="nav-icon">◷</span><span>纲要·问答 日课</span>
+      </a>
+      <a class="nav-item" data-view="about">
+        <span class="nav-icon">ⓘ</span><span>使用说明</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="side-date" id="sideDate"></div>
+      <div class="side-tip">日拱一卒 · 功不唐捐</div>
+    </div>
+  </aside>
+
+  <!-- ============ 移动端顶栏 ============ -->
+  <header class="mobile-topbar">
+    <div class="brand-emblem small">研</div>
+    <div class="mt-title" id="mtTitle">军转申论研学</div>
+    <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单">☰</button>
+  </header>
+
+  <!-- ============ 主内容 ============ -->
+  <main class="main">
+
+    <!-- 返回上层面包屑（导航中心页自动隐藏） -->
+    <div class="crumb-bar" id="crumbBar">
+      <button class="crumb-back" id="crumbBack" title="返回导航中心">← 返回导航中心</button>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current" id="crumbCurrent">当前栏目</span>
+    </div>
+
+    <!-- ---------- 导航中心 ---------- -->
+    <section class="view active" id="view-nav">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">导航中心</h2>
+          <p class="page-sub">全部栏目一览，点击卡片直达；也可在下方搜索框检索栏目、关键词、政策文件与时政。</p>
+        </div>
+        <div class="date-chip" id="navDateChip"></div>
+      </div>
+
+      <!-- 全站搜索 -->
+      <div class="panel nav-search-panel">
+        <div class="nav-search-box">
+          <span class="ns-ico">⌕</span>
+          <input type="text" id="globalSearch" placeholder="搜索栏目、热点词、政策文件、时政要闻…（如：新质生产力、APEC、就业）" autocomplete="off">
+          <button class="ns-clear" id="nsClear" title="清空">✕</button>
+        </div>
+        <div class="nav-search-results" id="globalSearchResults"></div>
+      </div>
+
+      <!-- 栏目导航 -->
+      <div class="nav-group-block">
+        <div class="ngb-hd"><h3>复习概览</h3></div>
+        <div class="nav-card-grid" id="navGroup1"></div>
+      </div>
+      <div class="nav-group-block mt">
+        <div class="ngb-hd"><h3>核心资料</h3></div>
+        <div class="nav-card-grid" id="navGroup2"></div>
+      </div>
+      <div class="nav-group-block mt">
+        <div class="ngb-hd"><h3>军转备考 · 特色专题</h3></div>
+        <div class="nav-card-grid" id="navGroup4"></div>
+      </div>
+      <div class="nav-group-block mt">
+        <div class="ngb-hd"><h3>理论学习</h3></div>
+        <div class="nav-card-grid" id="navGroup3"></div>
+      </div>
+
+      <div class="panel mt nav-guide">
+        <div class="panel-head"><h3>建议阅读路径</h3></div>
+        <div class="guide-flow">
+          <div class="guide-step"><span class="gs-num">1</span><div><b>今日概览</b><p>金句与当日日课，快速进入状态</p></div></div>
+          <span class="guide-arrow">→</span>
+          <div class="guide-step"><span class="gs-num">2</span><div><b>时政要闻</b><p>掌握最新讲话与会议精神</p></div></div>
+          <span class="guide-arrow">→</span>
+          <div class="guide-step"><span class="gs-num">3</span><div><b>主题分类 / 材料库</b><p>按主题或五位一体精读文件</p></div></div>
+          <span class="guide-arrow">→</span>
+          <div class="guide-step"><span class="gs-num">4</span><div><b>军转特色 / 北京市情</b><p>掌握差异化考点与本地语感</p></div></div>
+          <span class="guide-arrow">→</span>
+          <div class="guide-step"><span class="gs-num">5</span><div><b>申论技法 / 表达库</b><p>从素材到分数，学方法练表达</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 今日概览 ---------- -->
+    <section class="view" id="view-home">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">今日概览</h2>
+          <p class="page-sub" id="homeGreeting">欢迎回来，今天也离目标更近一步。</p>
+        </div>
+        <div class="date-chip" id="homeDateChip"></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num" id="statMaterial">0</div>
+          <div class="stat-label">在库政策文件</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statQuote">0</div>
+          <div class="stat-label">金句储备</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statWord">0</div>
+          <div class="stat-label">申论热点词</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-num" id="statDay">0</div>
+          <div class="stat-label">本月已坚持(天)</div>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <!-- 今日金句 -->
+        <div class="panel quote-hero">
+          <div class="panel-head">
+            <h3>今日金句</h3>
+            <button class="text-btn" id="homeQuoteRefresh">换一条 ↻</button>
+          </div>
+          <div class="quote-mark">“</div>
+          <blockquote class="quote-text" id="homeQuoteText"></blockquote>
+          <div class="quote-source" id="homeQuoteSource"></div>
+          <div class="quote-use" id="homeQuoteUse"></div>
+        </div>
+
+        <!-- 今日学习任务 -->
+        <div class="panel">
+          <div class="panel-head">
+            <h3>今日理论日课</h3>
+            <a class="text-btn" data-goto="study">查看全部 →</a>
+          </div>
+          <div class="daily-mini">
+            <div class="dm-tag">纲要 2023版</div>
+            <div class="dm-title" id="homeOutlineTitle"></div>
+            <div class="dm-desc" id="homeOutlineDesc"></div>
+          </div>
+          <div class="daily-mini">
+            <div class="dm-tag blue">学习问答</div>
+            <div class="dm-title" id="homeQATitle"></div>
+            <div class="dm-desc" id="homeQADesc"></div>
+          </div>
+          <button class="btn-primary full" data-goto="study">开始今日学习</button>
+        </div>
+      </div>
+
+      <!-- 时政速览 -->
+      <div class="panel mt">
+        <div class="panel-head">
+          <h3>时政要闻速览</h3>
+          <a class="text-btn" data-goto="affairs">查看全部 →</a>
+        </div>
+        <div class="affairs-mini-list" id="homeAffairs"></div>
+      </div>
+
+      <!-- 五位一体概览 -->
+      <div class="panel mt">
+        <div class="panel-head">
+          <h3>五位一体总体布局</h3>
+          <a class="text-btn" data-goto="library">进入材料库 →</a>
+        </div>
+        <div class="five-grid" id="fiveOverview"></div>
+      </div>
+    </section>
+
+    <!-- ---------- 每日推送存档 ---------- -->
+    <section class="view" id="view-push">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">每日推送存档</h2>
+          <p class="page-sub">每天中午 12:00 自动生成的复习卡片，按日期倒序存档。点击即可查看当天完整推送（金句、日课、时政、全量公文、热点词）。</p>
+        </div>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-ico">i</span>
+        <span>存档<b>每日自动累积</b>，打开当天推送即回到那一日的复习内容；金句与日课按日期轮换，可回顾任意历史日期。每份推送<b>无需单独保存</b>，点开链接即可阅读。</span>
+      </div>
+
+      <div class="result-meta" id="pushMeta"></div>
+      <div class="push-archive-list" id="pushArchiveList"></div>
+    </section>
+
+    <!-- ---------- 时政要闻 ---------- -->
+    <section class="view" id="view-affairs">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">时政要闻速览</h2>
+          <p class="page-sub">习近平最新讲话、中央全会与全国人大会议决议、《求是》等权威媒体文章、APEC等国内时事，按时间与层级梳理。</p>
+        </div>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-ico">i</span>
+        <span>本栏目补充<b>公文之外</b>的最新时政：最新讲话与会议决议为最高优先级；<b>《求是》、人民日报、青年网</b>等权威媒体文章用作话题与思想归纳；<b>APEC</b> 等重大时事作为时代背景。每条均附原文链接。</span>
+      </div>
+
+      <div class="word-filter" id="affairsFilter"></div>
+      <div class="result-meta" id="affairsMeta"></div>
+      <div class="affairs-list" id="affairsList"></div>
+    </section>
+
+    <!-- ---------- 材料库 ---------- -->
+    <section class="view" id="view-library">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">五位一体材料库</h2>
+          <p class="page-sub">全部为2026年6月以后中央及省级以上政府官网公文；按层级自动标记优先级，最上级文件优先呈现。</p>
+        </div>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-ico">i</span>
+        <span>优先级规则：<b>中共中央/国务院（一级）</b> &gt; 中央部委（二级） &gt; 省级政府（三级） &gt; 权威媒体话题（参考）。经济、社会领域全量推送，其余领域以中央发布为主。</span>
+      </div>
+
+      <!-- 领域标签 -->
+      <div class="domain-tabs" id="domainTabs"></div>
+
+      <!-- 筛选栏 -->
+      <div class="filter-bar">
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="text" id="searchInput" placeholder="搜索标题、发文机关、关键词…">
+        </div>
+        <select id="levelFilter" aria-label="来源层级">
+          <option value="all">全部层级</option>
+          <option value="1">中央（中共中央/国务院）</option>
+          <option value="2">中央部委</option>
+          <option value="3">省级政府</option>
+          <option value="4">权威媒体话题</option>
+        </select>
+        <select id="typeFilter" aria-label="公文类型">
+          <option value="all">全部文种</option>
+          <option value="意见">意见</option>
+          <option value="指导意见">指导意见</option>
+          <option value="通知">通知</option>
+          <option value="办法">办法</option>
+          <option value="条例">条例</option>
+          <option value="批复">批复</option>
+          <option value="方案">方案</option>
+          <option value="决定">决定</option>
+          <option value="规划纲要">规划纲要</option>
+          <option value="实施意见">实施意见</option>
+        </select>
+        <label class="sort-toggle">
+          <input type="checkbox" id="prioritySort" checked>
+          <span>按优先级排序</span>
+        </label>
+      </div>
+
+      <div class="result-meta" id="resultMeta"></div>
+      <div class="material-list" id="materialList"></div>
+    </section>
+
+    <!-- ---------- 主题·精神分类 ---------- -->
+    <section class="view" id="view-topics">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">主题 · 精神分类</h2>
+          <p class="page-sub">跳出五位一体，按政策主题与思想精神两条主线重新梳理材料与时政，点击卡片查看对应内容。</p>
+        </div>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-ico">i</span>
+        <span><b>主题</b>是横向政策议题（如科技创新、民生保障），可跨经济/社会等领域；<b>精神</b>是贯穿其中的立场与方法（人民至上、守正创新、系统观念、问题导向、法治思维、胸怀天下、敢于斗争）。一份材料可兼具多个标签。</span>
+      </div>
+
+      <div class="topic-block">
+        <div class="topic-block-hd"><h3>按政策主题</h3><span class="muted">点击查看该主题下的材料与时政</span></div>
+        <div class="theme-grid" id="themeGrid"></div>
+      </div>
+
+      <div class="topic-block mt">
+        <div class="topic-block-hd"><h3>按思想精神</h3><span class="muted">习近平新时代中国特色社会主义思想的立场观点方法</span></div>
+        <div class="spirit-grid" id="spiritGrid"></div>
+      </div>
+
+      <div class="panel mt" id="topicDetailPanel" style="display:none">
+        <div class="panel-head">
+          <h3 id="topicDetailTitle">分类详情</h3>
+          <button class="text-btn" id="topicDetailClose">收起 ✕</button>
+        </div>
+        <div class="topic-detail-list" id="topicDetailList"></div>
+      </div>
+    </section>
+
+    <!-- ---------- 数据统计看板 ---------- -->
+    <section class="view" id="view-stats">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">数据统计看板</h2>
+          <p class="page-sub">用图表直观掌握材料结构、时政分布与关键词热度，辅助把握复习重点。</p>
+        </div>
+      </div>
+
+      <div class="stat-cards" id="statCards"></div>
+
+      <div class="chart-grid">
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>五位一体 · 材料分布</h3></div>
+          <div id="chartDomain" class="chart-box"></div>
+        </div>
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>来源层级 · 优先级结构</h3></div>
+          <div id="chartLevel" class="chart-box"></div>
+        </div>
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>政策主题 · 覆盖热度</h3></div>
+          <div id="chartTheme" class="chart-box"></div>
+        </div>
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>思想精神 · 出现频次</h3></div>
+          <div id="chartSpirit" class="chart-box"></div>
+        </div>
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>时政要闻 · 分类占比</h3></div>
+          <div id="chartAffair" class="chart-box"></div>
+        </div>
+        <div class="panel chart-panel">
+          <div class="panel-head"><h3>文种结构 · 公文类型</h3></div>
+          <div id="chartType" class="chart-box"></div>
+        </div>
+      </div>
+
+      <div class="panel mt">
+        <div class="panel-head"><h3>关键词热度词云</h3><span class="muted">字号越大表示该词在备考中的权重越高</span></div>
+        <div id="wordCloud" class="word-cloud"></div>
+      </div>
+
+      <div class="panel mt">
+        <div class="panel-head"><h3>高频关键词排行 TOP 15</h3></div>
+        <div id="wordRank" class="word-rank"></div>
+      </div>
+    </section>
+
+    <!-- ---------- 热点词 ---------- -->
+    <section class="view" id="view-hotwords">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">申论热点词</h2>
+          <p class="page-sub">共 <b id="wordTotalCount">—</b> 个高频考点词汇，含内涵释义与作答应用角度，助力规范表达；热度权重见"数据统计看板"。</p>
+        </div>
+      </div>
+      <div class="word-filter" id="wordFilter"></div>
+      <div class="word-grid" id="wordGrid"></div>
+    </section>
+
+    <!-- ---------- 每日金句 ---------- -->
+    <section class="view" id="view-quotes">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">每日金句</h2>
+          <p class="page-sub">按日轮换的经典论述，可标注收藏，作为申论开头结尾与论证素材。</p>
+        </div>
+        <button class="btn-primary" id="quoteRefresh">换一条 ↻</button>
+      </div>
+      <div class="quote-display panel">
+        <div class="quote-mark big">“</div>
+        <blockquote id="bigQuoteText"></blockquote>
+        <div class="quote-source" id="bigQuoteSource"></div>
+        <div class="quote-use" id="bigQuoteUse"></div>
+        <button class="btn-ghost" id="favQuote">☆ 收藏本句</button>
+      </div>
+      <div class="panel mt">
+        <div class="panel-head">
+          <h3>金句库</h3>
+          <span class="muted" id="favCount"></span>
+        </div>
+        <div class="quote-library" id="quoteLibrary"></div>
+      </div>
+    </section>
+
+    <!-- ---------- 理论学习日课 ---------- -->
+    <section class="view" id="view-study">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">纲要 · 问答 日课</h2>
+          <p class="page-sub">《习近平新时代中国特色社会主义思想学习纲要（2023年版）》与《学习问答》按月循环、每天学一点。</p>
+        </div>
+        <div class="study-switch" id="studySwitch">
+          <button class="sw-btn active" data-tab="outline">学习纲要 2023版</button>
+          <button class="sw-btn" data-tab="qa">学习问答</button>
+        </div>
+      </div>
+
+      <div class="study-layout">
+        <div class="panel study-content">
+          <div class="study-day-bar">
+            <div>
+              <span class="sd-label">本月第</span>
+              <span class="sd-num" id="studyDayNum">1</span>
+              <span class="sd-label">天 / 每月循环</span>
+            </div>
+            <div class="study-nav">
+              <button class="circle-btn" id="prevDay">‹</button>
+              <button class="circle-btn" id="nextDay">›</button>
+            </div>
+          </div>
+          <div class="study-card">
+            <div class="study-badge" id="studyBadge">第一章</div>
+            <h3 id="studyTitle"></h3>
+            <div class="study-body" id="studyBody"></div>
+            <div class="study-points" id="studyPoints"></div>
+            <button class="study-done-btn" id="studyDoneBtn">○ 标记本课已学</button>
+          </div>
+        </div>
+
+        <div class="panel calendar-panel">
+          <div class="panel-head"><h3 id="calTitle">本月学习日历</h3></div>
+          <div class="calendar" id="calendar"></div>
+          <div class="cal-legend">
+            <span><i class="dot done"></i>已学</span>
+            <span><i class="dot today"></i>今日</span>
+            <span><i class="dot future"></i>未学</span>
+          </div>
+          <p class="cal-note">提示：点击日历中的日期可切换查看当日学习内容。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 军转特色专题 ---------- -->
+    <section class="view" id="view-mil">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">军转特色专题</h2>
+          <p class="page-sub">军转申论差异化考点：退役军人保障、强军思想、双拥与国防，普通公考资料中没有的加分内容。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">本专题聚焦军人身份、安置政策与国防军队主题。军转申论材料若涉及军人、安置、国防，这些是拉开差距的关键，请重点掌握 <b>退役军人安置条例</b> 与 <b>强军思想"十个明确"</b>。</div></div>
+      <div class="panel mt" id="milList"></div>
+    </section>
+
+    <!-- ---------- 北京市情专题 ---------- -->
+    <section class="view" id="view-bj">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">北京市情专题</h2>
+          <p class="page-sub">首都"四个中心"、京津冀协同、接诉即办、"七有五性"——北京军转申论的地域底色。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">北京考试地域性强，用本地案例与规范表达作答能显著提升辨识度。核心记忆点：<b>四个中心、四个服务、都产人城安全、接诉即办、七有五性、绣花功夫</b>。</div></div>
+      <div class="panel mt" id="bjList"></div>
+    </section>
+
+    <!-- ---------- 申论技法与真题 ---------- -->
+    <section class="view" id="view-skills">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">申论技法与真题</h2>
+          <p class="page-sub">五大题型答题框架 ＋ 真题特点与范文研读，把素材转化为分数的桥。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">资料库解决了"写什么"，本栏目解决"怎么写"。建议按题型逐个掌握框架，再用范文拆解练习迁移。示例题例依据公开考情整理，为仿真题例而非历年原题。</div></div>
+      <div class="panel mt" id="skillsList"></div>
+    </section>
+
+    <!-- ---------- 规范表达句式库 ---------- -->
+    <section class="view" id="view-express">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">规范表达句式库</h2>
+          <p class="page-sub">开头、过渡、对策、结尾的规范句式，口语转公文表达，以及军转与北京专属表达。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">申论语言的核心是<b>去口语化、用规范词</b>。本栏目按场景分类，可直接套用的句式与替换词，建议结合金句与热点词一起记忆。</div></div>
+      <div class="panel mt" id="expressList"></div>
+    </section>
+
+    <!-- ---------- 政策时间轴 ---------- -->
+    <section class="view" id="view-timeline">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">政策时间轴</h2>
+          <p class="page-sub">公文与时政按发布时间倒序排列，看清政策演进脉络与最新动向。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">时间轴将 <b>20份公文</b> 与 <b>16条时政</b> 合并按日期排列。越靠上越新，便于把握"最新精神"与政策延续性。</div></div>
+      <div class="panel mt" id="timelineList"></div>
+    </section>
+
+    <!-- ---------- 学习进度打卡 ---------- -->
+    <section class="view" id="view-progress">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">学习进度打卡</h2>
+          <p class="page-sub">已学日课、已读材料、收藏金句自动记录，形成复习闭环。</p>
+        </div>
+      </div>
+      <div class="panel"><div class="special-intro">进度保存在本机浏览器中（localStorage），刷新或离线打开都不丢失。在日课、材料、金句页面点击"已学/标记已读/收藏"，进度会自动同步到这里。</div></div>
+      <div class="panel mt" id="progressPanel"></div>
+    </section>
+
+    <!-- ---------- 使用说明 ---------- -->
+    <section class="view" id="view-about">
+      <div class="page-head">
+        <div>
+          <h2 class="page-title">使用说明</h2>
+          <p class="page-sub">关于本资料库的定位、来源与使用方法。</p>
+        </div>
+      </div>
+      <div class="panel about-panel">
+        <h3>一、资料定位</h3>
+        <p>本网页面向北京军转干部申论考核复习，围绕"五位一体"总体布局整理政策材料与理论学习内容，辅助理解政策精神、积累规范表达、提升作答能力。</p>
+
+        <h3>二、材料来源与优先级</h3>
+        <p>政策材料取自<b>中国政府网（www.gov.cn）</b>、教育部等中央及省级以上政府官方网站，全部为<b>2026年6月以后</b>发布的公文，文种含<b>意见、指导意见、通知、办法、条例、批复、方案</b>等；热点词由本批公文归纳而来。非公文类的《求是》、旗帜网等权威媒体文章仅作话题与金句参考，不计入公文。系统按来源层级标注优先级，<b>最上级文件为最优先</b>，每份材料均附官方原文链接，建议结合原文深读。</p>
+
+        <h3>三、栏目说明</h3>
+        <ul>
+          <li><b>今日概览</b>：每日金句、当日理论日课、时政速览与五位一体入口。</li>
+          <li><b>时政要闻速览</b>：分"最新讲话 / 会议决议 / 权威媒体 / 时事热点"四类，收录习近平最新讲话、二十届四中/五中全会公报、十四届全国人大四次会议决议、《求是》文章，以及 APEC、进博会等重大时事。</li>
+          <li><b>五位一体材料库</b>：按经济、政治、文化、社会、生态分类，支持按层级、文种筛选与关键词搜索；经济、社会领域全量推送。</li>
+          <li><b>主题·精神分类</b>：按8类政策主题与7类思想精神横向梳理材料与时政，一份内容可多标签。</li>
+          <li><b>数据统计看板</b>：材料领域/层级/文种、主题/精神覆盖、时政占比的图表，以及关键词词云与热度排行。</li>
+          <li><b>申论热点词</b>：高频词汇的内涵与应用角度（含扩充词库，热度权重见统计看板）。</li>
+          <li><b>每日金句</b>：按日轮换并可收藏的重要论述。</li>
+          <li><b>政策时间轴</b>：公文与时政合并按日期倒序排列，看清政策演进与最新动向。</li>
+          <li><b>学习进度打卡</b>：自动记录已学日课、已读材料与收藏金句，本机保存、形成闭环。</li>
+          <li><b>军转特色专题</b>：退役军人保障法、安置条例、强军思想、双拥与国防——差异化加分点。</li>
+          <li><b>北京市情专题</b>：四个中心、十五五规划、接诉即办、七有五性、京津冀协同——本地化语感。</li>
+          <li><b>申论技法与真题</b>：五大题型答题框架、真题特点与范文研读。</li>
+          <li><b>规范表达句式库</b>：开头/过渡/对策/结尾句式、口语转公文，及军转与北京专属表达。</li>
+          <li><b>纲要·问答日课</b>：《学习纲要（2023年版）》《学习问答》以月为单位循环，每天学一点，配套学习日历。</li>
+        </ul>
+
+        <h3>四、军转申论建议重点掌握的"四梁八柱"</h3>
+        <p>结合北京军转干部考核特点，建议优先吃透以下文件，做到"框架能背、金句能用、观点能引"：</p>
+        <ul>
+          <li><b>理论中枢</b>：习近平新时代中国特色社会主义思想（《学习纲要2023版》《学习问答》），党的二十大报告。</li>
+          <li><b>规划纲领</b>：二十届四中全会《"十五五"规划建议》、十四届全国人大四次会议《"十五五"规划纲要》与《政府工作报告》决议。</li>
+          <li><b>最新精神</b>：二十届五中全会公报及《全面从严治党决定》、中央经济工作会议精神、《求是》年度重点文章。</li>
+          <li><b>五位一体专项</b>：新质生产力、科技创新与产业融合、就业优先、乡村全面振兴、美丽中国、民生保障等中央意见。</li>
+          <li><b>军转特色</b>：国防和军队现代化、退役军人保障法、军民融合、双拥工作等（作答涉及身份与岗位时尤为加分）。</li>
+          <li><b>时事热点</b>：APEC 深圳会议、进博会、"一带一路"、新质生产力、人工智能+、全国统一大市场等年度热词。</li>
+        </ul>
+
+        <h3>五、学习建议</h3>
+        <p>建议每日先完成"理论日课"，再浏览当日金句与时政速览，结合热点词巩固表达，最后精读目标领域的中央文件要点。申论作答注重"政策语言 + 材料分析 + 结合实际"，本库内容可作为语言储备与观点支撑。</p>
+
+        <div class="about-disclaimer">
+          本资料为个人复习整理，内容依据公开权威来源归纳，如与原文表述有出入，以官方发布原文为准。
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- 移动端遮罩 -->
+<div class="overlay" id="overlay"></div>
+
+<!-- 返回顶部 -->
+<button class="back-top" id="backTop" title="返回顶部" aria-label="返回顶部">↑</button>
+
+<footer style="text-align:center;padding:24px 16px;font-size:12px;color:#888;line-height:1.8">© 2026 宇宇爱高高，本项目需求、方案设计由宇宇爱高高独立完成，WorkBuddy仅作为代码辅助生成工具，本人保留全部著作权。<br><span>👀 本机访问：<b id="hitCount" style="color:#9c1c1c">—</b> 次<span style="font-size:10px">（本地统计）</span></span></footer>
+
+<script src="data.js"></script>
+<script src="push_archive.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
