@@ -764,10 +764,32 @@ function initNavCenter() {
   };
   const kindClass = { view: 'k-view', word: 'k-word', material: 'k-material', affair: 'k-affair', quote: 'k-view' };
 
+  // 搜索模式：site=站内（搜本网页已发布内容），web=全网（跳转到搜索引擎）
+  let searchMode = 'site';
+  const modeBox = $('#nsMode');
+  const webTip = $('#nsWebTip');
+  if (modeBox) {
+    modeBox.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modeBox.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        searchMode = btn.dataset.mode;
+        input.placeholder = searchMode === 'site'
+          ? '搜索本网页已发布的内容：栏目、热点词、政策文件、时政要闻…（如：新质生产力、APEC、就业）'
+          : '输入关键词，按回车全网搜索（如：2026年北京市军转安置政策）';
+        if (webTip) webTip.classList.toggle('show', searchMode === 'web');
+        results.classList.remove('show'); results.innerHTML = '';
+        if (kwVal()) doSearch();
+      });
+    });
+  }
+  const kwVal = () => input.value.trim();
+
   const doSearch = () => {
     const kw = input.value.trim();
     clearBtn.classList.toggle('show', !!kw);
     if (!kw) { results.classList.remove('show'); results.innerHTML = ''; return; }
+    if (searchMode === 'web') { results.classList.remove('show'); return; }
     const lower = kw.toLowerCase();
     let matches = index.filter(it => it.kw.toLowerCase().includes(lower));
     // 栏目优先，其余按相关度（名称命中靠前）
@@ -799,7 +821,18 @@ function initNavCenter() {
     results.classList.add('show');
   };
   input.addEventListener('input', doSearch);
-  input.addEventListener('keydown', e => { if (e.key === 'Escape') { input.value = ''; doSearch(); input.blur(); } });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { input.value = ''; doSearch(); input.blur(); }
+    if (e.key === 'Enter') {
+      const kw = input.value.trim();
+      if (!kw) return;
+      if (searchMode === 'web') {
+        window.open('https://www.bing.com/search?q=' + encodeURIComponent(kw), '_blank', 'noopener');
+      } else if (results.classList.contains('show') && results.querySelector('.nsr-item')) {
+        results.querySelector('.nsr-item').click();
+      }
+    }
+  });
   clearBtn.addEventListener('click', () => { input.value = ''; doSearch(); input.focus(); });
 }
 

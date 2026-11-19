@@ -120,11 +120,16 @@
 
       <!-- 全站搜索 -->
       <div class="panel nav-search-panel">
+        <div class="ns-mode" id="nsMode">
+          <button class="active" data-mode="site">站内搜索</button>
+          <button data-mode="web">全网搜索</button>
+        </div>
         <div class="nav-search-box">
           <span class="ns-ico">⌕</span>
-          <input type="text" id="globalSearch" placeholder="搜索栏目、热点词、政策文件、时政要闻…（如：新质生产力、APEC、就业）" autocomplete="off">
+          <input type="text" id="globalSearch" placeholder="搜索本网页已发布的内容：栏目、热点词、政策文件、时政要闻…（如：新质生产力、APEC、就业）" autocomplete="off">
           <button class="ns-clear" id="nsClear" title="清空">✕</button>
         </div>
+        <div class="ns-web-tip" id="nsWebTip">全网搜索：输入关键词后按 <b>回车</b>，将在新标签页打开搜索引擎查询全网最新资讯。</div>
         <div class="nav-search-results" id="globalSearchResults"></div>
       </div>
 
