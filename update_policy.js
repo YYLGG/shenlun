@@ -103,14 +103,15 @@ fs.writeFileSync(dataPath, src, 'utf8');
 
 // ---- 记录入库日期到账本（供每日推送判断"当日新增"，实现"每天一张新报纸"） ----
 try {
-  const LEDGER = path.join('/workspace/juanguan-private', '入库日期.json');
+  const LEDGERS = [path.join(base, '入库日期.json'), path.join('/workspace/juanguan-private', '入库日期.json')];
   let ledger = {};
-  try { ledger = JSON.parse(fs.readFileSync(LEDGER, 'utf8')); } catch (e) { ledger = {}; }
+  for (const lp of LEDGERS) { try { ledger = JSON.parse(fs.readFileSync(lp, 'utf8')); break; } catch (e) {} }
   // 北京时间当天（date 是政策发布日期，可能与入库日不同，故用入库当天）
   const now = new Date(Date.now() + 8 * 3600 * 1000);
   const inDate = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`;
   ledger[newId] = inDate;
-  fs.writeFileSync(LEDGER, JSON.stringify(ledger, null, 2), 'utf8');
+  // 两份账本同步写入：项目目录内的会随 GitHub 同步，保证 Actions 环境账本一致
+  LEDGERS.forEach(lp => { try { fs.writeFileSync(lp, JSON.stringify(ledger, null, 2), 'utf8'); } catch (e) {} });
 } catch (e) { console.error('警告：入库日期账本写入失败 - ' + e.message); }
 
 console.log(JSON.stringify({ status: 'added', id: newId, title: p.title, date: p.date, level: p.level, keyword: p.keyword }));
