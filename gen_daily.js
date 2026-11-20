@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const base = __dirname;
+const base = '/workspace/juanguan-shenlun';
 // 在线完整版公网链接（分享码是访问凭据，必须完整保留）
 const SHARE_LINK = 'https://a56f8f2d42187ca60.app.workbuddy.host/?sharecode=CO4NF42T3B';
 let code = fs.readFileSync(path.join(base, 'data.js'), 'utf8').replace(/\bconst /g, 'var ');
@@ -162,6 +162,18 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
 .af-use b{color:#9c1c1c}
 .foot{text-align:center;font-size:11.5px;color:#999;padding:16px 0}
 .foot b{color:#9c1c1c}
+.save-pdf-bar{text-align:center;margin:0 0 16px}
+.save-pdf-btn{display:inline-block;background:#2c5d8f;color:#fff;border:none;border-radius:22px;padding:11px 26px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(44,93,143,.25)}
+.save-pdf-btn:hover{background:#1f4469}
+@media print{
+  @page{size:A4;margin:12mm 10mm}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important;padding:0!important;font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif!important}
+  .wrap{max-width:100%!important}
+  .save-pdf-bar{display:none!important}
+  .card,.doc-item,.affair-item,.doc-group,.hd{break-inside:avoid;page-break-inside:avoid}
+  .card{box-shadow:none!important}
+}
 </style>
 </head>
 <body>
@@ -170,6 +182,10 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
     <div class="kicker">北京军转干部申论考核复习</div>
     <h1>今日研学推送</h1>
     <div class="date">${y}年${m}月${d}日 · ${week} · 第 ${d} 天</div>
+  </div>
+
+  <div class="save-pdf-bar">
+    <button class="save-pdf-btn" onclick="window.print()">📄 保存本期为 PDF</button>
   </div>
 
   <div class="card">
@@ -257,4 +273,65 @@ const archiveJs = '/* 由 gen_daily.js 自动生成：每日推送归档清单�
 fs.writeFileSync(path.join(base, 'push_archive.js'), archiveJs, 'utf8');
 console.log('归档清单已更新:', archives.length, '份推送');
 
+/* ==== 每日修改日志：仅写入私有目录 /workspace/juanguan-private（不发布到线上） ==== */
+const dateStr = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+const PRIVATE_DIR = '/workspace/juanguan-private';
+if (!fs.existsSync(PRIVATE_DIR)) fs.mkdirSync(PRIVATE_DIR, { recursive: true });
+const STATE_FILE = path.join(PRIVATE_DIR, '修改日志_state.json');
+const LOG_FILE = path.join(PRIVATE_DIR, '修改日志.md');
+const crypto2 = require('crypto');
+const tracked = fs.readdirSync(base).filter(f => /\.(js|html|css|md)$/.test(f) && !f.startsWith('今日推送_') && !f.startsWith('修改日志') && !f.startsWith('预览_'));
+const hashes = {};
+tracked.forEach(f => { hashes[f] = crypto2.createHash('md5').update(fs.readFileSync(path.join(base, f))).digest('hex'); });
+let prev = {};
+try { prev = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { prev = null; }
+const changes = prev
+  ? tracked.filter(f => !prev[f] || prev[f] !== hashes[f]).map(f => `- ${f}（${prev[f] ? '已修改' : '新增'}）`)
+  : ['（首次运行，建立基线，无对比记录）'];
+const todayPolicies = MATERIALS.filter(mm => mm.date === dateStr).map(mm => `- ${mm.title}`);
+const logText = `\n## ${dateStr} 修改内容日志\n\n### 文件变更\n${changes.join('\n') || '- 无文件改动'}\n\n### 当日新增政策\n${todayPolicies.join('\n') || '- 无新增政策'}\n\n### 当日推送\n- 今日推送_${dateStr}.html（公文 ${MATERIALS.length} 份，全量展示）\n`;
+let logAll = '';
+try { logAll = fs.readFileSync(LOG_FILE, 'utf8'); } catch (e) { logAll = '# 修改内容日志\n'; }
+if (!logAll.includes('## ' + dateStr)) { fs.writeFileSync(LOG_FILE, logAll + logText, 'utf8'); }
+fs.writeFileSync(STATE_FILE, JSON.stringify(hashes, null, 2), 'utf8');
+// 生成可网页查看的日志页（含目录内所有日志文件内容）
+let logMd = '';
+try { logMd = fs.readFileSync(LOG_FILE, 'utf8'); } catch (e) {}
+const logHtml = '<!DOCTYPE html>\n<html lang="zh-CN">\n<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>修改内容日志</title><style>body{font-family:"PingFang SC",sans-serif;max-width:760px;margin:30px auto;padding:0 18px;color:#333;line-height:1.8}h1{font-size:22px;color:#9c1c1c}h2{font-size:17px;margin-top:28px;border-bottom:1px solid #eee;padding-bottom:6px}pre{white-space:pre-wrap;font-family:inherit;font-size:14px;color:#555}</style></head>\n<body><h1>修改内容日志</h1><pre>' + logMd.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre></body>\n</html>\n';
+fs.writeFileSync(path.join(PRIVATE_DIR, '修改日志.html'), logHtml, 'utf8');
+console.log('修改日志已更新:', dateStr);
 
+/* ==== 每日自动重建离线单文件版（放 /workspace 供下载，永不依赖链接） ==== */
+try {
+  require('child_process').execSync('node "' + path.join(base, 'build_offline.js') + '"', { stdio: 'ignore' });
+  console.log('离线单文件版已重建');
+} catch (e) { console.error('离线版重建失败:', e.message); }
+
+/* ==== 同步生成 PDF：把每份推送 HTML 转成 PDF，供网页端「下载PDF」按钮下载 ==== */
+/* 已存在的跳过，仅当天新增的会生成；失败不影响主推送。PDF 与 HTML 同目录，网页按钮可直接访问 */
+try {
+  const { execFileSync } = require('child_process');
+  const pdfDir = base;
+  const chromePath = ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', process.env.CHROME_PATH].filter(Boolean).find(p => { try { return fs.existsSync(p); } catch (e) { return false; } });
+  if (chromePath) {
+    for (const a of archives) {
+      const pdfName = a.file.replace(/\.html$/, '.pdf');
+      const pdfOut = path.join(pdfDir, pdfName);
+      if (fs.existsSync(pdfOut)) continue; // 已存在跳过
+      const html = fs.readFileSync(path.join(base, a.file), 'utf8');
+      const tmp = path.join(base, '.__pdf_tmp.html');
+      fs.writeFileSync(tmp, html, 'utf8'); // 模板已内置 @media print 样式
+      try {
+        execFileSync(chromePath, ['--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--no-pdf-header-footer', `--print-to-pdf=${pdfOut}`, 'file://' + tmp], { stdio: 'ignore', timeout: 60000 });
+        console.log('PDF 已生成:', pdfName);
+      } catch (e) {
+        console.log('PDF 生成失败(不影响推送):', pdfName);
+        try { fs.unlinkSync(pdfOut); } catch (e2) {}
+      } finally {
+        try { fs.unlinkSync(tmp); } catch (e2) {}
+      }
+    }
+  } else {
+    console.log('未找到 Chrome，跳过 PDF 生成（不影响推送）。');
+  }
+} catch (e) { console.log('PDF 环节跳过:', e.message); }
