@@ -863,7 +863,7 @@ function initPush() {
       </div>
       <div class="pa-body">
         <div class="pa-title">${a.label}${tag}${isToday ? '<span class="pa-today">今天</span>' : ''}</div>
-        <div class="pa-desc">当日金句 · 理论日课 · 时政要闻 · 全量公文 · 热点词，一键回顾</div>
+        <div class="pa-desc">当日金句 · 理论日课 · 时政要闻 · 当日新增政策 · 热点词，一键回顾</div>
       </div>
       <div class="pa-open">
         <span>查看推送 ↗</span>
