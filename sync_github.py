@@ -9,6 +9,7 @@
 由 gen_daily.js 在每日生成推送末尾调用。
 """
 import os, sys, json, base64, subprocess, time, urllib.request, urllib.error
+from urllib.parse import quote
 from datetime import datetime
 
 OWNER = "YYLGG"
@@ -96,15 +97,16 @@ def main():
             continue
         with open(path, "rb") as f:
             content = base64.b64encode(f.read()).decode()
+        enc_name = quote(name, safe="()_.~-")  # 中文文件名需 URL 编码
         sha = sha_map.get(name, "")
         if not sha:  # 文件树未覆盖时兜底单查
-            code, meta = api("GET", f"{API}/{name}?ref={BRANCH}", token)
+            code, meta = api("GET", f"{API}/{enc_name}?ref={BRANCH}", token)
             if code == 200 and isinstance(meta, dict):
                 sha = meta.get("sha", "")
         body = {"message": msg, "content": content, "branch": BRANCH}
         if sha:
             body["sha"] = sha
-        code, resp = api("PUT", f"{API}/{name}", token, body)
+        code, resp = api("PUT", f"{API}/{enc_name}", token, body)
         if code in (200, 201):
             print(f"  OK   {name}")
             ok += 1
