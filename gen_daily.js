@@ -26,7 +26,10 @@ const qa = QA_DAYS[qai];
 /* ==== 当日新增公文：按"入库日期账本"筛选，实现"每天一张新报纸" ==== */
 // 今日推送只展示当天新入库的政策；历史公文不再重复出现，改由站内搜索/材料库查阅。
 let intakeLedger = {};
-try { intakeLedger = JSON.parse(fs.readFileSync('/workspace/juanguan-private/入库日期.json', 'utf8')); } catch (e) { intakeLedger = {}; }
+// 优先读项目目录内的账本（随文件同步到 GitHub，Actions 环境也能读到），回退私有目录
+for (const ledgerPath of [path.join(base, '入库日期.json'), '/workspace/juanguan-private/入库日期.json']) {
+  try { intakeLedger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8')); break; } catch (e) {}
+}
 const todayStamp = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 const allDocs = MATERIALS.filter(mm => intakeLedger[mm.id] === todayStamp);
 const DOM_ORDER = ['economy','politics','culture','social','eco'];
