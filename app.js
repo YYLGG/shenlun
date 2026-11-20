@@ -854,7 +854,9 @@ function initPush() {
     const tag = i === 0 ? '<span class="pa-new">最新</span>' : '';
     const today = (typeof dateInfo === 'function') ? dateInfo() : null;
     const isToday = today && `${today.y}-${String(today.m).padStart(2,'0')}-${String(today.d).padStart(2,'0')}` === a.date;
-    return `<a class="push-card${isToday ? ' is-today' : ''}" href="${a.file}${suffix}" target="_blank" rel="noopener">
+    const pdfFile = a.file.replace(/\.html$/, '.pdf');
+    const openUrl = a.file + suffix;
+    return `<div class="push-card${isToday ? ' is-today' : ''}" role="link" tabindex="0" data-open="${openUrl}">
       <div class="pa-date">
         <div class="pa-day">${a.d}</div>
         <div class="pa-ym">${a.y}.${String(a.m).padStart(2,'0')}</div>
@@ -863,9 +865,18 @@ function initPush() {
         <div class="pa-title">${a.label}${tag}${isToday ? '<span class="pa-today">今天</span>' : ''}</div>
         <div class="pa-desc">当日金句 · 理论日课 · 时政要闻 · 全量公文 · 热点词，一键回顾</div>
       </div>
-      <div class="pa-open">查看推送 ↗</div>
-    </a>`;
+      <div class="pa-open">
+        <span>查看推送 ↗</span>
+        <a class="pa-pdf" href="${pdfFile}" download title="下载本期 PDF" aria-label="下载 PDF">📄 下载PDF</a>
+      </div>
+    </div>`;
   }).join('');
+  // 卡片整体点击/回车打开推送；点击 PDF 下载按钮时不触发（download 链接本身不冒泡干扰）
+  list.querySelectorAll('.push-card').forEach(card => {
+    const open = () => { const u = card.getAttribute('data-open'); if (u) window.open(u, '_blank', 'noopener'); };
+    card.addEventListener('click', e => { if (e.target.closest('.pa-pdf')) return; open(); });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  });
 }
 
 /* ---------- 返回顶部 ---------- */
