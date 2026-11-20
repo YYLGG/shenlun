@@ -65,6 +65,18 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
 .af-use b{color:#9c1c1c}
 .foot{text-align:center;font-size:11.5px;color:#999;padding:16px 0}
 .foot b{color:#9c1c1c}
+.save-pdf-bar{text-align:center;margin:0 0 16px}
+.save-pdf-btn{display:inline-block;background:#2c5d8f;color:#fff;border:none;border-radius:22px;padding:11px 26px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(44,93,143,.25)}
+.save-pdf-btn:hover{background:#1f4469}
+@media print{
+  @page{size:A4;margin:12mm 10mm}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important;padding:0!important;font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif!important}
+  .wrap{max-width:100%!important}
+  .save-pdf-bar{display:none!important}
+  .card,.doc-item,.affair-item,.doc-group,.hd{break-inside:avoid;page-break-inside:avoid}
+  .card{box-shadow:none!important}
+}
 </style>
 </head>
 <body>
@@ -73,6 +85,10 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
     <div class="kicker">北京军转干部申论考核复习</div>
     <h1>今日研学推送</h1>
     <div class="date">2026年11月20日 · 星期五 · 第 20 天</div>
+  </div>
+
+  <div class="save-pdf-bar">
+    <button class="save-pdf-btn" onclick="window.print()">📄 保存本期为 PDF</button>
   </div>
 
   <div class="card">
@@ -133,19 +149,19 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
     <h2>主题 · 精神分类速览</h2>
     <div class="doc-overview">按8类政策主题与7类思想精神横向梳理，一份内容可兼具多个标签。</div>
     <div style="font-size:12px;color:#7d1414;font-weight:700;margin:6px 0 4px">政策主题覆盖</div>
-    <div><span class="stat-chip">民生保障与社会 <b>15</b></span><span class="stat-chip">高质量发展与经济 <b>14</b></span><span class="stat-chip">科技创新与新质生产力 <b>10</b></span><span class="stat-chip">党的建设与治理 <b>9</b></span><span class="stat-chip">改革开放与开放合作 <b>7</b></span><span class="stat-chip">生态文明与绿色 <b>6</b></span><span class="stat-chip">安全与风险防控 <b>5</b></span><span class="stat-chip">教育人才与文化 <b>4</b></span></div>
+    <div><span class="stat-chip">民生保障与社会 <b>17</b></span><span class="stat-chip">高质量发展与经济 <b>14</b></span><span class="stat-chip">科技创新与新质生产力 <b>11</b></span><span class="stat-chip">党的建设与治理 <b>9</b></span><span class="stat-chip">改革开放与开放合作 <b>8</b></span><span class="stat-chip">生态文明与绿色 <b>6</b></span><span class="stat-chip">安全与风险防控 <b>5</b></span><span class="stat-chip">教育人才与文化 <b>4</b></span></div>
     <div style="font-size:12px;color:#8e44ad;font-weight:700;margin:12px 0 4px">思想精神频次</div>
-    <div><span class="stat-chip purple">系统观念 <b>25</b></span><span class="stat-chip purple">人民至上 <b>16</b></span><span class="stat-chip purple">守正创新 <b>9</b></span><span class="stat-chip purple">法治思维 <b>8</b></span><span class="stat-chip purple">问题导向 <b>7</b></span><span class="stat-chip purple">胸怀天下 <b>6</b></span><span class="stat-chip purple">敢于斗争 <b>5</b></span></div>
+    <div><span class="stat-chip purple">系统观念 <b>26</b></span><span class="stat-chip purple">人民至上 <b>17</b></span><span class="stat-chip purple">守正创新 <b>11</b></span><span class="stat-chip purple">问题导向 <b>9</b></span><span class="stat-chip purple">法治思维 <b>8</b></span><span class="stat-chip purple">胸怀天下 <b>6</b></span><span class="stat-chip purple">敢于斗争 <b>5</b></span></div>
   </div>
 
   <div class="card">
     <h2>政策公文全览 · 官方原文</h2>
-    <div class="doc-overview">共 22 份公文，按五位一体分组、来源层级排序，每日完整推送。全部为2026年6月以后中央/国务院公文；热点词由本批公文归纳，求是等文章仅作话题来源。</div>
+    <div class="doc-overview">共 24 份公文，按五位一体分组、来源层级排序，每日完整推送。全部为2026年6月以后中央/国务院公文；热点词由本批公文归纳，求是等文章仅作话题来源。</div>
     
   <div class="doc-group">
     <div class="doc-group-hd" style="border-left-color:#c0392b">
       <span class="dg-name" style="color:#c0392b">经济建设</span>
-      <span class="dg-count">5 份</span>
+      <span class="dg-count">7 份</span>
     </div>
     
       <div class="doc-item" style="border-left-color:#c0392b">
@@ -195,6 +211,30 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
         <div class="doc-points">· 国函〔2026〕66号，坚持扩大内需战略基点，深入实施提振消费专项行动。<br>· 到2030年社会消费品零售总额达60万亿元左右，居民消费率明显提高。<br>· 扩大服务消费，升级商品消费，丰富数字消费、绿色消费、体验消费等业态场景。<br>· 完善扩大居民消费长效机制，清理优化消费领域不合理限制性措施，优化入境消费环境。</div>
         <div class="doc-use"><b>申论应用：</b>扩大内需、提振消费、服务消费、全国统一大市场、"十五五"开局类主题。</div>
         <a class="doc-link" href="https://www.gov.cn/zhengce/zhengceku/202607/content_7075217.htm" target="_blank" rel="noopener">中国政府网·原文 ↗</a>
+      </div>
+      <div class="doc-item" style="border-left-color:#c0392b">
+        <div class="doc-meta">
+          <span class="tag">二级·中央部委</span>
+          <span class="tag type">通知</span>
+          <span class="tag date">2026-11-19</span>
+        </div>
+        <div class="doc-title">北京市规划和自然资源委员会关于精简优化乡村地区规划编制 高效推进首都乡村振兴的通知</div>
+        <div class="doc-org">发文机关：<b>北京市规划和自然资源委员会</b></div>
+        <div class="doc-points">· 推动乡村地区规划精简优化，形成一文、两图、三表的简易成果，不搞成果深度一刀切，切实压缩编审周期、降低成本、提高审批效率<br>· 推动村庄规划采用通则式管理，简化形成村民公约，灵活高效指导村庄建设实施和项目审批管理<br>· 强化数智赋能，用好国土空间规划一张图实施监督信息系统，鼓励探索AI辅助规划编制决策新技术<br>· 依托京韵乡村共创计划和多师协同机制，发动专业力量开展公益性、陪伴式规划技术服务，助力首都乡村振兴降本增效</div>
+        <div class="doc-use"><b>申论应用：</b>基层治理减负赋能、乡村振兴、数字政府建设等主题素材，可论证简政放权、放管结合、优化服务的改革逻辑与科技赋能治理创新</div>
+        <a class="doc-link" href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202611/t20261119_4952498.html" target="_blank" rel="noopener">北京市人民政府网 ↗</a>
+      </div>
+      <div class="doc-item" style="border-left-color:#c0392b">
+        <div class="doc-meta">
+          <span class="tag">二级·中央部委</span>
+          <span class="tag type">通知</span>
+          <span class="tag date">2026-11-16</span>
+        </div>
+        <div class="doc-title">北京市市场监督管理局等八部门关于印发《促进特殊医学用途配方食品创新发展若干措施》的通知</div>
+        <div class="doc-org">发文机关：<b>北京市市场监督管理局等八部门</b></div>
+        <div class="doc-points">· 支持产学研协同攻关特医食品原料、配方、生产、检验关键技术，重点支持临床急需的特定全营养配方、罕见病特医食品、婴幼儿特医食品研发创新<br>· 对特医食品领域标准厂房项目按比例给予市政府固定资产投资补助，鼓励建设特医食品中试平台和智能工厂<br>· 建设特医食品重点实验室，形成临床需求、研发攻关、成果转化、临床应用、真实世界证据反哺的闭环体系<br>· 通过北京专精特新专板拓宽企业直接融资渠道，培育特医食品产业链</div>
+        <div class="doc-use"><b>申论应用：</b>健康产业与新质生产力、创新生态、民生健康保障等主题的鲜活案例，可用于论证科技创新与产业创新融合、政府精准施策培育新赛道</div>
+        <a class="doc-link" href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202611/t20261119_4952559.html" target="_blank" rel="noopener">北京市人民政府网 ↗</a>
       </div>
       <div class="doc-item" style="border-left-color:#c0392b">
         <div class="doc-meta">
