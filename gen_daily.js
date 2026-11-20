@@ -1,4 +1,4 @@
-/* 生成"今日推送"HTML：从 data.js 读取内容，公文全量展示 */
+/* 生成"今日推送"HTML：每天一张新报纸——公文只展示当日新入库政策，历史公文由站内搜索查阅 */
 const fs = require('fs');
 const path = require('path');
 
@@ -23,9 +23,12 @@ const q = QUOTES[qi];
 const o = OUTLINE_DAYS[oi];
 const qa = QA_DAYS[qai];
 
-/* ==== 全部公文：按五位一体分组，组内按层级(上级在先)排序 ==== */
-// 全量纳入材料库公文（用户要求每日推送包含全部公文，不做类型过滤）
-const allDocs = MATERIALS.slice();
+/* ==== 当日新增公文：按"入库日期账本"筛选，实现"每天一张新报纸" ==== */
+// 今日推送只展示当天新入库的政策；历史公文不再重复出现，改由站内搜索/材料库查阅。
+let intakeLedger = {};
+try { intakeLedger = JSON.parse(fs.readFileSync('/workspace/juanguan-private/入库日期.json', 'utf8')); } catch (e) { intakeLedger = {}; }
+const todayStamp = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+const allDocs = MATERIALS.filter(mm => intakeLedger[mm.id] === todayStamp);
 const DOM_ORDER = ['economy','politics','culture','social','eco'];
 const grouped = DOM_ORDER.map(key => ({
   key,
@@ -212,9 +215,9 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
   </div>
 
   <div class="card">
-    <h2>政策公文全览 · 官方原文</h2>
-    <div class="doc-overview">共 ${allDocs.length} 份公文，按五位一体分组、来源层级排序，每日完整推送。全部为2026年6月以后中央/国务院公文；热点词由本批公文归纳，求是等文章仅作话题来源。</div>
-    ${docGroupsHtml}
+    <h2>今日新增政策 · 官方原文</h2>
+    <div class="doc-overview">每天一张新报纸：本栏只展示<b>今日（${todayStamp}）新入库</b>的政策，共 ${allDocs.length} 份。往期公文不再重复推送，请在网页「站内搜索」或「五位一体材料库」中查阅全部历史文件。</div>
+    ${allDocs.length ? docGroupsHtml : '<div class="doc-empty" style="text-align:center;padding:26px 12px;color:#888;font-size:13px;line-height:1.9">📭 今日暂无新入库政策。<br>金句、日课、时政、热点词照常更新；<br>全部历史公文请通过网页「站内搜索」或「材料库」查阅。</div>'}
   </div>
 
   <div class="card">
@@ -254,7 +257,8 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
 const out = path.join(base, '今日推送_' + y + '-' + String(m).padStart(2,'0') + '-' + String(d).padStart(2,'0') + '.html');
 fs.writeFileSync(out, html, 'utf8');
 console.log('已生成:', out);
-console.log('公文总数:', allDocs.length, '(全部推送)');
+console.log('今日新增政策:', allDocs.length, '份（其余历史公文改由站内搜索查阅）');
+console.log('材料库总数:', MATERIALS.length, '份');
 grouped.forEach(g => console.log('  ' + g.name + ': ' + g.docs.length + ' 份'));
 
 /* ==== 重建推送归档清单：扫描目录内所有 今日推送_YYYY-MM-DD.html ==== */
@@ -289,7 +293,7 @@ const changes = prev
   ? tracked.filter(f => !prev[f] || prev[f] !== hashes[f]).map(f => `- ${f}（${prev[f] ? '已修改' : '新增'}）`)
   : ['（首次运行，建立基线，无对比记录）'];
 const todayPolicies = MATERIALS.filter(mm => mm.date === dateStr).map(mm => `- ${mm.title}`);
-const logText = `\n## ${dateStr} 修改内容日志\n\n### 文件变更\n${changes.join('\n') || '- 无文件改动'}\n\n### 当日新增政策\n${todayPolicies.join('\n') || '- 无新增政策'}\n\n### 当日推送\n- 今日推送_${dateStr}.html（公文 ${MATERIALS.length} 份，全量展示）\n`;
+const logText = `\n## ${dateStr} 修改内容日志\n\n### 文件变更\n${changes.join('\n') || '- 无文件改动'}\n\n### 当日新增政策\n${todayPolicies.join('\n') || '- 无新增政策'}\n\n### 当日推送\n- 今日推送_${dateStr}.html（当日新增 ${todayPolicies.length} 份；材料库累计 ${MATERIALS.length} 份，历史公文改由站内搜索查阅）\n`;
 let logAll = '';
 try { logAll = fs.readFileSync(LOG_FILE, 'utf8'); } catch (e) { logAll = '# 修改内容日志\n'; }
 if (!logAll.includes('## ' + dateStr)) { fs.writeFileSync(LOG_FILE, logAll + logText, 'utf8'); }
