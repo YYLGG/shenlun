@@ -22,7 +22,8 @@ API = f"https://api.github.com/repos/{OWNER}/{REPO}/contents"
 TREE_API = f"https://api.github.com/repos/{OWNER}/{REPO}/git/trees/{BRANCH}?recursive=1"
 
 CORE = ["index.html", "app.js", "style.css", "data.js", "push_archive.js",
-        "gen_daily.js", "update_policy.js", "build_offline.js", "sync_github.py", "sync_github.sh"]
+        "gen_daily.js", "update_policy.js", "build_offline.js", "sync_github.py", "sync_github.sh",
+        "入库日期.json"]
 PUSH = [f for f in os.listdir(SRC) if f.startswith("今日推送_") and f.endswith(".html")]
 FILES = CORE + sorted(PUSH)
 
