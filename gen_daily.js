@@ -335,3 +335,20 @@ try {
     console.log('未找到 Chrome，跳过 PDF 生成（不影响推送）。');
   }
 } catch (e) { console.log('PDF 环节跳过:', e.message); }
+
+/* ==== 每日自动同步到 GitHub Pages（保证与 WorkBuddy 站点内容一致） ==== */
+try {
+  const { execFileSync } = require('child_process');
+  const syncScript = path.join(base, 'sync_github.py');
+  if (fs.existsSync(syncScript)) {
+    console.log('正在同步到 GitHub Pages…');
+    const out = execFileSync('python3', [syncScript], { encoding: 'utf8', timeout: 600000 });
+    console.log(out.trim());
+  } else {
+    console.log('未找到 sync_github.py，跳过 GitHub 同步');
+  }
+} catch (e) {
+  // 如实报告同步失败，但不影响当日推送与 publish.js
+  const detail = (e.stderr || e.stdout || e.message || '').toString().trim();
+  console.error('GitHub Pages 同步失败（如实报告）:', detail);
+}
