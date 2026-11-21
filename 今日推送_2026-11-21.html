@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- 作者：宇宇爱高高，创建时间：2026-11-19，自主设计，AI辅助编码 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="author" content="宇宇爱高高">
+<meta name="copyright" content="© 2026 宇宇爱高高">
+<meta name="generator" content="WorkBuddy，需求与设计由宇宇爱高高完成">
+<title>军转申论·今日推送 11月21日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;color:#2b2b2b;line-height:1.8;padding:20px}
+.wrap{max-width:720px;margin:0 auto}
+.hd{background:linear-gradient(135deg,#9c1c1c,#7d1414);color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:16px;position:relative;overflow:hidden}
+.hd::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hd .kicker{font-size:12px;letter-spacing:3px;opacity:.8}
+.hd h1{font-size:24px;margin:6px 0 4px;letter-spacing:1px}
+.hd .date{font-size:13px;opacity:.85}
+.card{background:#fffdf9;border:1px solid #e8e2d8;border-radius:12px;padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 14px rgba(90,60,30,.07)}
+.card h2{font-size:15px;color:#7d1414;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.card h2::before{content:"";width:4px;height:16px;background:#b8912f;border-radius:2px}
+.qmark{font-size:52px;color:#d9b64d;line-height:.5;font-family:Georgia,serif;opacity:.55}
+.qtext{font-size:18px;line-height:2;font-weight:500;margin:8px 0 12px}
+.qsrc{font-size:12px;color:#9c1c1c;border-left:2px solid #b8912f;padding-left:10px}
+.quse{font-size:12px;color:#7a5c22;background:#fbf4e6;border-radius:6px;padding:8px 12px;margin-top:12px}
+.badge{display:inline-block;font-size:11px;color:#fff;background:#9c1c1c;padding:2px 10px;border-radius:4px;margin-bottom:8px}
+.badge.blue{background:#2c5d8f}
+.stitle{font-size:16px;font-weight:700;line-height:1.5;margin-bottom:8px}
+.sbody{font-size:13px;color:#555;line-height:1.9}
+.pts{background:#faf8f3;border-radius:8px;padding:12px 16px;margin-top:12px}
+.pts .h{font-size:12px;color:#7d1414;font-weight:700;margin-bottom:6px}
+.pts ul{padding-left:18px;font-size:12.5px;color:#555;line-height:1.9}
+.word{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e8e2d8}
+.word:last-child{border-bottom:none}
+.word .n{font-size:14px;font-weight:700;color:#7d1414;min-width:96px}
+.word .d{font-size:12.5px;color:#555}
+.doc-overview{font-size:12px;color:#888;margin:-6px 0 14px}
+.doc-group{margin-bottom:18px}
+.doc-group-hd{display:flex;align-items:center;gap:10px;border-left:4px solid;padding-left:12px;margin-bottom:10px}
+.dg-name{font-size:15px;font-weight:700}
+.dg-count{font-size:12px;color:#999}
+.doc-item{border:1px solid #ebe5db;border-left:3px solid;border-radius:8px;padding:14px 16px;margin-bottom:10px;background:#fff}
+.doc-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.tag{font-size:10.5px;padding:2px 8px;border-radius:4px;color:#fff;background:#9c1c1c}
+.tag.type{background:#eef2f7;color:#2c5d8f}
+.tag.date{background:transparent;color:#999;padding-left:0}
+.doc-title{font-size:14px;font-weight:700;line-height:1.5;color:#2b2b2b;margin-bottom:5px}
+.doc-org{font-size:11.5px;color:#999;margin-bottom:8px}
+.doc-org b{color:#9c1c1c}
+.doc-points{font-size:11.8px;color:#555;line-height:1.9;background:#faf8f3;border-radius:6px;padding:8px 12px}
+.doc-use{font-size:11.5px;color:#7a5c22;margin-top:7px}
+.doc-use b{color:#9c1c1c}
+.doc-link{display:inline-block;margin-top:8px;font-size:11.5px;color:#2c5d8f;border:1px solid #c9d6e4;border-radius:5px;padding:3px 10px;text-decoration:none}
+.stat-chip{display:inline-block;font-size:11px;padding:3px 10px;border-radius:14px;background:#fbeeec;color:#9c1c1c;margin:0 6px 6px 0;border:1px solid #f0d5d2}
+.stat-chip b{font-size:12px}
+.stat-chip.purple{background:#f4eefa;color:#8e44ad;border-color:#e3d4f0}
+.affair-item{border:1px solid #ebe5db;border-left:3px solid;border-radius:8px;padding:12px 15px;margin-bottom:10px;background:#fff}
+.af-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.af-cat{font-size:10.5px;color:#fff;padding:2px 8px;border-radius:4px}
+.af-date{font-size:10.5px;color:#999}
+.af-title{font-size:13.5px;font-weight:700;line-height:1.5;color:#2b2b2b;margin-bottom:6px}
+.af-pts{font-size:11.5px;color:#555;line-height:1.8;background:#faf8f3;border-radius:6px;padding:8px 11px}
+.af-use{font-size:11.2px;color:#7a5c22;margin-top:6px}
+.af-use b{color:#9c1c1c}
+.foot{text-align:center;font-size:11.5px;color:#999;padding:16px 0}
+.foot b{color:#9c1c1c}
+.save-pdf-bar{text-align:center;margin:0 0 16px}
+.save-pdf-btn{display:inline-block;background:#2c5d8f;color:#fff;border:none;border-radius:22px;padding:11px 26px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 3px 10px rgba(44,93,143,.25)}
+.save-pdf-btn:hover{background:#1f4469}
+@media print{
+  @page{size:A4;margin:12mm 10mm}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important;padding:0!important;font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif!important}
+  .wrap{max-width:100%!important}
+  .save-pdf-bar{display:none!important}
+  .card,.doc-item,.affair-item,.doc-group,.hd{break-inside:avoid;page-break-inside:avoid}
+  .card{box-shadow:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hd">
+    <div class="kicker">北京军转干部申论考核复习</div>
+    <h1>今日研学推送</h1>
+    <div class="date">2026年11月21日 · 星期六 · 第 21 天</div>
+  </div>
+
+  <div class="save-pdf-bar">
+    <button class="save-pdf-btn" onclick="window.print()">📄 保存本期为 PDF</button>
+  </div>
+
+  <div class="card">
+    <h2>今日金句</h2>
+    <div class="qmark">“</div>
+    <div class="qtext">江山就是人民，人民就是江山。</div>
+    <div class="qsrc">—— 习近平（党的二十大报告相关论述）</div>
+    <div class="quse"><b>申论应用：</b>开头点明人民立场，适用于民生、群众工作类主题。</div>
+  </div>
+
+  <div class="card">
+    <h2>时政要闻 · 最新讲话与会议精神</h2>
+    <div class="doc-overview">按发布时间取最新4条，涵盖习近平最新讲话、中央全会/人大决议、《求是》等权威媒体文章与重大时事，均附原文链接。</div>
+    
+  <div class="affair-item" style="border-left-color:#2c5d8f">
+    <div class="af-meta">
+      <span class="af-cat" style="background:#2c5d8f">时事热点</span>
+      <span class="af-date">2026-11-18</span>
+    </div>
+    <div class="af-title">2026年APEC第三十三次领导人非正式会议在深圳举行</div>
+    <div class="af-pts">· 主题"建设亚太共同体，促进共同繁荣"，设"开放、创新、合作"三大优先领域；中国第三次担任APEC东道主。<br>· 这是"十五五"开局之年最重要的主场外交，中国是13个APEC经济体最大贸易伙伴，对亚太经济增长贡献率超六成。<br>· 中方推动绘就亚太共同体建设路线图，围绕贸易、联通、创新、发展打造具体成果。<br>· 同年还举行苏州贸易部长会议《苏州声明》、成都数字和人工智能部长会议《成都声明》（首次将"开源"提升到APEC部长级层面）。</div>
+    <div class="af-use"><b>申论应用：</b>高水平对外开放、人类命运共同体、多边主义、亚太共同体、制度型开放等主题的头号时政背景；适合作为大国外交与开放合作的鲜活例证。</div>
+    <a class="doc-link" href="https://www.fmprc.gov.cn/gjhdq_676201/gjhdqzz_681964/lhg_682278/jbqk_682280/" target="_blank" rel="noopener">外交部·APEC专题 ↗</a>
+  </div>
+  <div class="affair-item" style="border-left-color:#9c1c1c">
+    <div class="af-meta">
+      <span class="af-cat" style="background:#9c1c1c">最新讲话</span>
+      <span class="af-date">2026-11-18</span>
+    </div>
+    <div class="af-title">习近平在APEC工商领导人峰会上的主旨演讲《坚定信心 勇毅前行 共创亚太光明未来》</div>
+    <div class="af-pts">· 提出"促进亚太共同繁荣"四点主张：维护和平稳定大局、搭建开放合作桥梁、激发创新增长动力、拓展互利共赢路径。<br>· "稳，才能安；安，才能兴""开放带来进步，封闭必然落后"。<br>· 强调构建科技创新伙伴关系，深化数字经济、人工智能合作，促进绿色低碳转型。<br>· 宣布中国为全球工商界提供超大规模开放市场、广阔发展空间、互促共进合作环境。</div>
+    <div class="af-use"><b>申论应用：</b>开放合作、创新增长、互利共赢、数字经济、多边贸易体制等主题的金句与观点来源； 演讲结构与申论对策段落高度契合。</div>
+    <a class="doc-link" href="https://www.news.cn/politics/leaders/20261118/656367581ebe4dcb8700fd9f59905ef6/c.html" target="_blank" rel="noopener">新华社·演讲全文 ↗</a>
+  </div>
+  <div class="affair-item" style="border-left-color:#9c1c1c">
+    <div class="af-meta">
+      <span class="af-cat" style="background:#9c1c1c">最新讲话</span>
+      <span class="af-date">2026-11-18</span>
+    </div>
+    <div class="af-title">习近平在APEC第三十三次领导人非正式会议欢迎晚宴上的祝酒辞</div>
+    <div class="af-pts">· "看千年的中国去西安，看五百年的中国去北京，看一百年的中国去上海，看五十年的中国就来深圳。"<br>· 概括深圳精神：开放是与生俱来的基因、创新是活力所在、合作是力量之源。<br>· "来了就是深圳人"——以城市故事讲中国改革开放与亚太合作的缩影。</div>
+    <div class="af-use"><b>申论应用：</b>改革开放、创新驱动、城市治理、包容发展主题的生动素材；以小切口讲大道理的典范表达。</div>
+    <a class="doc-link" href="https://news.cctv.cn/2026/11/18/ARTIrsW7RAq0j0XWYl220U7e261118.shtml" target="_blank" rel="noopener">央视网·祝酒辞全文 ↗</a>
+  </div>
+  <div class="affair-item" style="border-left-color:#b8912f">
+    <div class="af-meta">
+      <span class="af-cat" style="background:#b8912f">权威媒体</span>
+      <span class="af-date">2026-11-16</span>
+    </div>
+    <div class="af-title">新华社政论《同舟共济，开创亚太和世界更加美好未来》</div>
+    <div class="af-pts">· 系统梳理习近平主席关于亚太合作的系列重要论述与APEC历史。<br>· 从"亚太命运共同体意识"到"建设亚太共同体"，勾勒中国理念的演进脉络。<br>· "开放是亚太合作的生命线""创新是亚太繁荣的动力源"。</div>
+    <div class="af-use"><b>申论应用：</b>大型政论的标准结构与论证方法，是申论文章写作的范本；亚太、开放、创新主题素材库。</div>
+    <a class="doc-link" href="https://www.news.cn/world/20261116/2da9c629eb8a466ca08a1c7524896eae/c.html" target="_blank" rel="noopener">新华网·政论全文 ↗</a>
+  </div>
+  </div>
+
+  <div class="card">
+    <h2>主题 · 精神分类速览</h2>
+    <div class="doc-overview">按8类政策主题与7类思想精神横向梳理，一份内容可兼具多个标签。</div>
+    <div style="font-size:12px;color:#7d1414;font-weight:700;margin:6px 0 4px">政策主题覆盖</div>
+    <div><span class="stat-chip">民生保障与社会 <b>18</b></span><span class="stat-chip">高质量发展与经济 <b>15</b></span><span class="stat-chip">科技创新与新质生产力 <b>11</b></span><span class="stat-chip">党的建设与治理 <b>9</b></span><span class="stat-chip">改革开放与开放合作 <b>8</b></span><span class="stat-chip">生态文明与绿色 <b>6</b></span><span class="stat-chip">安全与风险防控 <b>5</b></span><span class="stat-chip">教育人才与文化 <b>4</b></span></div>
+    <div style="font-size:12px;color:#8e44ad;font-weight:700;margin:12px 0 4px">思想精神频次</div>
+    <div><span class="stat-chip purple">系统观念 <b>27</b></span><span class="stat-chip purple">人民至上 <b>18</b></span><span class="stat-chip purple">守正创新 <b>11</b></span><span class="stat-chip purple">问题导向 <b>9</b></span><span class="stat-chip purple">法治思维 <b>8</b></span><span class="stat-chip purple">胸怀天下 <b>6</b></span><span class="stat-chip purple">敢于斗争 <b>5</b></span></div>
+  </div>
+
+  <div class="card">
+    <h2>今日新增政策 · 官方原文</h2>
+    <div class="doc-overview">每天一张新报纸：本栏只展示<b>今日（2026-11-21）新入库</b>的政策，共 1 份。往期公文不再重复推送，请在网页「站内搜索」或「五位一体材料库」中查阅全部历史文件。</div>
+    
+  <div class="doc-group">
+    <div class="doc-group-hd" style="border-left-color:#2c5d8f">
+      <span class="dg-name" style="color:#2c5d8f">社会建设</span>
+      <span class="dg-count">1 份</span>
+    </div>
+    
+      <div class="doc-item" style="border-left-color:#2c5d8f">
+        <div class="doc-meta">
+          <span class="tag">一级·中共中央/国务院</span>
+          <span class="tag type">重要指示</span>
+          <span class="tag date">2026-11-19</span>
+        </div>
+        <div class="doc-title">习近平对老龄工作作出重要指示（全国老龄工作会议传达）</div>
+        <div class="doc-org">发文机关：<b>新华社（受权发布）</b></div>
+        <div class="doc-points">· 深入实施积极应对人口老龄化国家战略，坚持政府、市场、社会、家庭协同发力，进一步加强老年人社会保障、养老服务、健康服务、社会参与。<br>· 大力发展银发经济，营造孝老敬老良好环境，建设老年友好社会，努力让老年人的生活更加幸福美满。<br>· 分层分类做好老龄工作：注重老有所养和老有所为相统筹、服务保障梯度供给、居家社区机构服务贯通协调、政策均衡性和精准性。<br>· 围绕基本生活、身心健康、价值实现、品质化消费四类需求推进老龄工作重点任务，锚定“十五五”目标任务解决老年人急难愁盼问题。</div>
+        <div class="doc-use"><b>申论应用：</b>民生养老类申论核心素材，可用于积极应对人口老龄化、银发经济与扩大内需、分层分类精准施策、以人民为中心等命题</div>
+        <a class="doc-link" href="https://cpc.people.com.cn/n1/2026/1120/c64094-40837428.html" target="_blank" rel="noopener">人民网-人民日报原文 ↗</a>
+      </div>
+  </div>
+  </div>
+
+  <div class="card">
+    <h2>今日理论日课 · 学习纲要（2023版）</h2>
+    <span class="badge">结语</span>
+    <div class="stitle">深刻领悟"两个确立"的决定性意义</div>
+    <div class="sbody">深刻领悟"两个确立"的决定性意义，增强"四个意识"、坚定"四个自信"、做到"两个维护"，把学习贯彻习近平新时代中国特色社会主义思想不断引向深入。</div>
+    <div class="pts"><div class="h">要点速记</div><ul><li>深刻领悟"两个确立"的决定性意义</li><li>增强"四个意识"、坚定"四个自信"、做到"两个维护"</li><li>自觉用党的创新理论武装头脑、指导实践、推动工作</li></ul></div>
+  </div>
+
+  <div class="card">
+    <h2>今日理论日课 · 学习问答</h2>
+    <span class="badge blue">第1问</span>
+    <div class="stitle">为什么说习近平新时代中国特色社会主义思想是党和国家必须长期坚持的指导思想？</div>
+    <div class="sbody">这一思想是当代中国马克思主义、二十一世纪马克思主义，是中华文化和中国精神的时代精华，实现了马克思主义中国化时代化新的飞跃。它是党和人民实践经验和集体智慧的结晶，是全党全国人民为实现中华民族伟大复兴而奋斗的行动指南。</div>
+    <div class="pts"><div class="h">要点速记</div><ul><li>是马克思主义中国化时代化新的飞跃</li><li>是全党全国人民的行动指南</li><li>是党和国家必须长期坚持的指导思想</li></ul></div>
+  </div>
+
+  <div class="card">
+    <h2>今日热点词</h2>
+    <div class="word"><div class="n">统筹发展和安全</div><div class="d">增强忧患意识、坚持底线思维，在发展中固安全、在安全中谋发展，有效防范化解人工智能应用、金融、生态等重点领域风险。</div></div><div class="word"><div class="n">科技创新和产业创新深度融合</div><div class="d">促进创新链产业链无缝对接，以高质量科技供给支撑现代化产业体系建设，加强企业主导的产学研融通创新，提高创新资源统筹配置效能。</div></div><div class="word"><div class="n">普惠养老服务</div><div class="d">面向广大老年人、价格可负担、质量有保障的养老服务，通过完善价格形成机制推动提质扩面，让老年人安享幸福晚年。</div></div>
+  </div>
+
+  <div class="card" style="text-align:center;background:linear-gradient(135deg,#9c1c1c,#7d1414);color:#fff;border:none">
+    <div style="font-size:15px;font-weight:700;margin-bottom:8px">在线完整版 · 手机电脑均可打开</div>
+    <div style="font-size:12px;opacity:.9;line-height:1.7;margin-bottom:14px">全部栏目随时查阅 · 学习进度打卡 · 政策时间轴<br>请完整保留链接中的 sharecode 参数</div>
+    <a href="https://a56f8f2d42187ca60.app.workbuddy.host/?sharecode=CO4NF42T3B" style="display:inline-block;background:#fff;color:#9c1c1c;padding:9px 20px;border-radius:22px;text-decoration:none;font-size:13px;font-weight:700">打开在线复习网页 →</a>
+    <div style="font-size:10px;opacity:.8;margin-top:12px;word-break:break-all">https://a56f8f2d42187ca60.app.workbuddy.host/?sharecode=CO4NF42T3B</div>
+  </div>
+
+  <div class="foot">每日 <b>12:00</b> 准时推送 · 时政源自新华社/人民网/求是/中国政府网 · 日拱一卒 · 功不唐捐</div>
+  <div style="text-align:center;margin-top:10px;font-size:11px;color:#999;line-height:1.8">© 2026 宇宇爱高高，本项目需求、方案设计由宇宇爱高高独立完成，WorkBuddy仅作为代码辅助生成工具，本人保留全部著作权。</div>
+</div>
+</body>
+</html>
