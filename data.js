@@ -346,20 +346,6 @@ const MATERIALS = [
     ],
     use: "基层治理减负赋能、乡村振兴、数字政府建设等主题素材，可论证简政放权、放管结合、优化服务的改革逻辑与科技赋能治理创新",
     link: { url: "https://www.beijing.gov.cn/zhengce/zhengcefagui/202611/t20261119_4952498.html", label: "北京市人民政府网" }
-  },
-  {
-    id: "s08", domain: "social", level: 1, type: "重要指示",
-    keyword: "老龄工作",
-    title: "习近平对老龄工作作出重要指示（全国老龄工作会议传达）",
-    org: "新华社（受权发布）", date: "2026-11-19",
-    points: [
-      "深入实施积极应对人口老龄化国家战略，坚持政府、市场、社会、家庭协同发力，进一步加强老年人社会保障、养老服务、健康服务、社会参与。",
-      "大力发展银发经济，营造孝老敬老良好环境，建设老年友好社会，努力让老年人的生活更加幸福美满。",
-      "分层分类做好老龄工作：注重老有所养和老有所为相统筹、服务保障梯度供给、居家社区机构服务贯通协调、政策均衡性和精准性。",
-      "围绕基本生活、身心健康、价值实现、品质化消费四类需求推进老龄工作重点任务，锚定“十五五”目标任务解决老年人急难愁盼问题。"
-    ],
-    use: "民生养老类申论核心素材，可用于积极应对人口老龄化、银发经济与扩大内需、分层分类精准施策、以人民为中心等命题",
-    link: { url: "https://cpc.people.com.cn/n1/2026/1120/c64094-40837428.html", label: "人民网-人民日报原文" }
   }
 
 
@@ -718,6 +704,19 @@ const AFFAIRS = [
     use: '党的建设、党风廉政、自我革命主题的核心论述；与二十届五中全会决定配套掌握。',
     link: { url: 'https://www.qstheory.cn/', label: '求是网' }
   },
+  {
+    id: 's06', cat: 'speech', level: 1,
+    title: '习近平对老龄工作作出重要指示',
+    org: '新华社 / 人民日报', date: '2026-11-19',
+    points: [
+      '深入实施积极应对人口老龄化国家战略，坚持政府、市场、社会、家庭协同发力，进一步加强老年人社会保障、养老服务、健康服务、社会参与。',
+      '大力发展银发经济，营造孝老敬老良好环境，建设老年友好社会，努力让老年人的生活更加幸福美满。',
+      '全国老龄工作会议11月18日至19日在京召开，李强出席并讲话，强调分层分类做好老龄工作，注重老有所养与老有所为相统筹。',
+      '锚定"十五五"目标任务，着力解决好老年人急难愁盼问题，推动新征程老龄事业高质量发展。'
+    ],
+    use: '积极应对人口老龄化、银发经济、以人民为中心、民生保障类主题的权威时政素材，可与养老服务改革公文配合使用。',
+    link: { url: 'https://cpc.people.com.cn/n1/2026/1120/c64094-40837428.html', label: '人民网-人民日报原文' }
+  },
 
   /* ===== 会议决议 ===== */
   {
@@ -879,8 +878,6 @@ const MATERIAL_TAGS = {
   e06: { themes:['innov','people'], spirits:['innov','problem','people'] }
 ,
   e07: { themes:['reform','people'], spirits:['problem','system','innov'] }
-,
-  s08: { themes:['people','economy'], spirits:['people','system'] }
 };
 
 /* 时政主题/精神标签映射 */
@@ -893,6 +890,7 @@ const AFFAIR_TAGS = {
   s03: { themes:['economy','people'],     spirits:['system','people'] },
   s04: { themes:['people'],               spirits:['people','problem'] },
   s05: { themes:['party'],                spirits:['struggle','rule'] },
+  s06: { themes:['people','economy'],     spirits:['people','system'] },
   m01: { themes:['party'],                spirits:['struggle','system'] },
   m02: { themes:['economy','innov'],      spirits:['system','innov'] },
   m03: { themes:['economy','people'],     spirits:['system','people'] },
