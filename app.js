@@ -694,7 +694,7 @@ const NAV_GROUPS = [
     { view: 'library', name: '五位一体材料库', icon: '▤', color: '#2c5d8f', count: MATERIALS.length + ' 份', desc: '经济/政治/文化/社会/生态五类公文，支持层级、文种筛选与搜索。' },
     { view: 'topics', name: '主题·精神分类', icon: '◈', color: '#8e44ad', count: THEMES.length + '主题·' + SPIRITS.length + '精神', desc: '按政策主题与思想精神两条主线横向梳理，点击卡片看关联内容。' },
     { view: 'stats', name: '数据统计看板', icon: '▧', color: '#d68910', count: '6 图表', desc: '领域/层级/主题/精神/时政/文种分布图，关键词词云与热度排行。' },
-    { view: 'timeline', name: '政策时间轴', icon: '⌁', color: '#2980b9', count: (MATERIALS.length + AFFAIRS.length) + ' 条', desc: '公文与时政按发布时间倒序排列，看清政策演进脉络与最新动向。' },
+    { view: 'timeline', name: '政策时间轴', icon: '⌁', color: '#2980b9', count: MATERIALS.length + ' 份公文', desc: '全部公文按发布时间倒序排列，看清政策演进脉络（时政请见「时政要闻速览」）。' },
     { view: 'hotwords', name: '申论热点词', icon: '✦', color: '#c0392b', count: ALL_WORDS.length + ' 词', desc: '高频考点词的内涵释义与作答应用角度，助力规范表达。' },
     { view: 'quotes', name: '每日金句', icon: '❝', color: '#b8912f', count: QUOTES.length + ' 条', desc: '按日轮换的经典论述，可收藏，用于开头结尾与论证。' }
   ]},
@@ -986,8 +986,8 @@ function initTimeline() {
   if (!box) return;
   box.className = 'panel mt';
   const items = [];
+  // 政策时间轴只收录公文；时政内容见「时政要闻速览」栏目
   MATERIALS.forEach(m => items.push({ date: m.date, kind: '公文', title: m.title, org: m.org, url: m.link && m.link.url, cls: '' }));
-  AFFAIRS.forEach(a => items.push({ date: a.date, kind: AFFAIRS_CAT_NAME[a.cat] || '时政', title: a.title, org: a.org, url: a.link && a.link.url, cls: 'tl-affair' }));
   items.sort((a, b) => b.date.localeCompare(a.date));
   box.innerHTML = `<div class="timeline-wrap">${items.map(it => `
     <div class="tl-item ${it.cls}">
