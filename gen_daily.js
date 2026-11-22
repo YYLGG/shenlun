@@ -97,6 +97,7 @@ const docGroupsHtml = grouped.map(g => `
         <div class="doc-org">发文机关：<b>${esc(mm.org)}</b></div>
         <div class="doc-points">${mm.points.map(p => '· ' + esc(p)).join('<br>')}</div>
         <div class="doc-use"><b>申论应用：</b>${esc(mm.use)}</div>
+        ${mm.card ? `<div class="answer-card"><div class="ac-h">答题语言转化卡</div><div><b>${esc(mm.card.lead)}</b></div><div>${mm.card.points.map(p => '· ' + esc(p)).join('<br>')}</div><div>${esc(mm.card.ending)}</div><div>${esc(mm.card.useFor)}</div></div>` : ''}
         <a class="doc-link" href="${esc(mm.link.url)}" target="_blank" rel="noopener">${esc(mm.link.label)} ↗</a>
       </div>`).join('')}
   </div>`).join('');
@@ -154,6 +155,15 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
 .doc-points{font-size:11.8px;color:#555;line-height:1.9;background:#faf8f3;border-radius:6px;padding:8px 12px}
 .doc-use{font-size:11.5px;color:#7a5c22;margin-top:7px}
 .doc-use b{color:#9c1c1c}
+.answer-card{margin-top:10px;border:1px dashed #d9b64d;background:#fffdf5;border-radius:8px;padding:10px 12px;font-size:11.5px;color:#5b4a22;line-height:1.85}
+.answer-card .ac-h{font-size:11.5px;color:#7d1414;font-weight:700;margin-bottom:5px}
+.answer-card b{color:#7a5c22}
+.mil-case{border:1px solid #ebe5db;border-left:3px solid #9c1c1c;border-radius:8px;padding:11px 14px;margin-bottom:10px;background:#fff}
+.mil-case .mc-scene{font-size:13px;font-weight:700;color:#2b2b2b}
+.mil-case .mc-transfer{font-size:11.5px;color:#8e44ad;margin:4px 0}
+.mil-case .mc-thesis{font-size:11.8px;color:#555;background:#faf8f3;border-radius:6px;padding:7px 10px}
+.mil-case .mc-demo{font-size:11.5px;color:#7a5c22;margin-top:5px}
+.mil-case .mc-tags{font-size:10.5px;color:#999;margin-top:5px}
 .doc-link{display:inline-block;margin-top:8px;font-size:11.5px;color:#2c5d8f;border:1px solid #c9d6e4;border-radius:5px;padding:3px 10px;text-decoration:none}
 .stat-chip{display:inline-block;font-size:11px;padding:3px 10px;border-radius:14px;background:#fbeeec;color:#9c1c1c;margin:0 6px 6px 0;border:1px solid #f0d5d2}
 .stat-chip b{font-size:12px}
@@ -185,7 +195,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
 <body>
 <div class="wrap">
   <div class="hd">
-    <div class="kicker">北京军转干部申论考核复习</div>
+    <div class="kicker">北京军转干部申论考核复习 · ${esc(VERSION)}</div>
     <h1>今日研学推送</h1>
     <div class="date">${y}年${m}月${d}日 · ${week} · 第 ${d} 天</div>
   </div>
@@ -244,6 +254,19 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
     ${words.map(w => '<div class="word"><div class="n">' + esc(w.name) + '</div><div class="d">' + esc(w.def) + '</div></div>').join('')}
   </div>
 
+  <div class="card">
+    <h2>军旅经历 · 申论转化示例</h2>
+    <div class="doc-overview">把部队真实经历转化为阅卷认可的论证语言：场景 → 转化角度 → 可用分论点 → 示范句。共 ${MIL_CASES.length} 例，不涉及暂停更新的考题部分。</div>
+    ${MIL_CASES.map(c => `
+      <div class="mil-case">
+        <div class="mc-scene">军营场景｜${esc(c.scene)}</div>
+        <div class="mc-transfer">转化角度｜${esc(c.transfer)}</div>
+        <div class="mc-thesis">可用分论点｜${esc(c.thesis)}</div>
+        <div class="mc-demo">示范句｜${esc(c.demo)}</div>
+        <div class="mc-tags">适用主题：${esc(c.tags)}</div>
+      </div>`).join('')}
+  </div>
+
   <div class="card" style="text-align:center;background:linear-gradient(135deg,#9c1c1c,#7d1414);color:#fff;border:none">
     <div style="font-size:15px;font-weight:700;margin-bottom:8px">在线完整版 · 手机电脑均可打开</div>
     <div style="font-size:12px;opacity:.9;line-height:1.7;margin-bottom:14px">全部栏目随时查阅 · 学习进度打卡 · 政策时间轴<br>请完整保留链接中的 sharecode 参数</div>
@@ -251,7 +274,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f2ec;c
     <div style="font-size:10px;opacity:.8;margin-top:12px;word-break:break-all">${esc(SHARE_LINK)}</div>
   </div>
 
-  <div class="foot">每日 <b>12:00</b> 准时推送 · 时政源自新华社/人民网/求是/中国政府网 · 日拱一卒 · 功不唐捐</div>
+  <div class="foot">版本 <b>${esc(VERSION)}</b>（升级须经用户确认） · 每日 <b>12:00</b> 准时推送 · 时政源自新华社/人民网/求是/中国政府网 · 日拱一卒 · 功不唐捐</div>
   <div style="text-align:center;margin-top:10px;font-size:11px;color:#999;line-height:1.8">© 2026 宇宇爱高高，本项目需求、方案设计由宇宇爱高高独立完成，WorkBuddy仅作为代码辅助生成工具，本人保留全部著作权。</div>
 </div>
 </body>
