@@ -312,6 +312,7 @@ function renderMaterials() {
         <ul>${m.points.map(p => `<li>${p}</li>`).join('')}</ul>
       </div>
       <div class="mc-use"><b>申论应用：</b>${m.use}</div>
+      ${m.card ? `<div class="answer-card" style="margin-top:8px;border:1px dashed #d9b64d;background:#fffdf5;border-radius:8px;padding:10px 12px;font-size:12px;color:#5b4a22;line-height:1.8"><div style="font-weight:700;color:#7d1414;margin-bottom:4px">答题语言转化卡</div><div><b>${m.card.lead}</b></div><div>${m.card.points.map(p => '· ' + p).join('<br>')}</div><div>${m.card.ending}</div><div>${m.card.useFor}</div></div>` : ''}
       <div class="mc-actions">
         <a class="mc-link" href="${m.link.url}" target="_blank" rel="noopener">${m.link.label} ↗</a>
         <button class="mc-read-btn${(progress.read || []).includes(m.id) ? ' done' : ''}" data-id="${m.id}">${(progress.read || []).includes(m.id) ? '✓ 已读' : '○ 标记已读'}</button>
@@ -718,6 +719,8 @@ const VIEW_NAME = {
 };
 
 function initNavCenter() {
+  const vl = $('#versionLabel');
+  if (vl && typeof VERSION !== 'undefined') vl.textContent = VERSION;
   const di = dateInfo();
   const chip = $('#navDateChip');
   if (chip) chip.textContent = di.full;
@@ -948,7 +951,17 @@ function pageNoticeHtml(key) {
   return (ymd >= PAGE_NOTICE.start && ymd <= PAGE_NOTICE.end)
     ? `<div class="notice-bar" style="margin-bottom:14px"><span>${PAGE_NOTICE[key]}</span></div>` : '';
 }
-function initMil() { renderSpecialList('#milList', MIL_DATA, false); const box = $('#milList'); if (box) box.insertAdjacentHTML('beforebegin', pageNoticeHtml('mil')); }
+function initMil() {
+  renderSpecialList('#milList', MIL_DATA, false);
+  const box = $('#milList');
+  if (!box) return;
+  box.insertAdjacentHTML('beforebegin', pageNoticeHtml('mil'));
+  // V1.0：军旅经历→申论案例转化示例（独立于暂停更新的考题模块）
+  if (typeof MIL_CASES !== 'undefined') {
+    box.insertAdjacentHTML('beforeend', '<div class="panel mt" style="border-left:4px solid #9c1c1c"><div style="font-size:15px;font-weight:700;color:#7d1414;margin-bottom:4px">军旅经历 · 申论转化示例</div><div style="font-size:12px;color:#888;margin-bottom:12px">把部队真实经历转化为阅卷认可的论证语言：场景 → 转化角度 → 可用分论点 → 示范句。</div>' +
+      MIL_CASES.map(c => '<div class="special-card" style="margin-bottom:10px"><div class="sc-title">' + c.scene + '</div><div class="mc-points executive">· 转化角度：' + c.transfer + '<br>· 可用分论点：' + c.thesis + '<br>· 示范句：' + c.demo + '</div><div class="sc-use"><b>适用主题：</b>' + c.tags + '</div></div>').join('') + '</div>');
+  }
+}
 function initBj() { renderSpecialList('#bjList', BJ_DATA, true); }
 
 /* ---------- 申论技法 ---------- */
