@@ -64,6 +64,30 @@ const newId = prefix + String(n).padStart(2, '0');
 const themes = Array.isArray(p.themes) && p.themes.length ? p.themes : ['people'];
 const spirits = Array.isArray(p.spirits) && p.spirits.length ? p.spirits : ['system'];
 
+// ---- V1.0：每条新政策自动生成"答题语言转化卡" ----
+function buildCard(policy) {
+  if (policy.card && policy.card.lead) return policy.card;
+  const dn = { economy: '经济建设', politics: '政治建设', culture: '文化建设', social: '社会建设', eco: '生态文明' };
+  const ending = {
+    economy: '以高质量发展之笔，书写中国式现代化的首都篇章。',
+    politics: '把制度优势更好转化为治理效能，让党旗在基层一线高高飘扬。',
+    culture: '让历史文化与现代生活交相辉映，不断增强首都文化软实力。',
+    social: '把群众急难愁盼办实办好，让获得感成色更足、幸福感更可持续、安全感更有保障。',
+    eco: '以高品质生态环境支撑高质量发展，建设人与自然和谐共生的美丽北京。'
+  };
+  const mm = policy.title.match(/《([^》]+)》/);
+  const raw = mm ? mm[1] : policy.title;
+  const short = raw.length > 26 ? raw.slice(0, 26) + '…' : raw;
+  const kw = policy.keyword || dn[policy.domain];
+  return {
+    lead: '一句话定位｜' + policy.org + '发布的《' + short + '》，是' + dn[policy.domain] + '领域可直接引用的权威依据，适用于' + kw + '类题目。',
+    points: policy.points.slice(0, 3).map((s, i) => '分论点' + (i + 1) + '｜' + s),
+    ending: '结尾句｜' + ending[policy.domain],
+    useFor: '适用题型｜' + policy.use
+  };
+}
+const card = buildCard(p);
+
 // ---- 构造条目文本（单行 points 以匹配现有风格）----
 const pts = p.points.map(s => JSON.stringify(s)).join(',\n      ');
 const entry =
@@ -76,6 +100,7 @@ const entry =
       ${pts}
     ],
     use: ${JSON.stringify(p.use)},
+    card: ${JSON.stringify(card)},
     link: { url: ${JSON.stringify(p.url)}, label: ${JSON.stringify(p.label || '官方原文')} }
   }`;
 
